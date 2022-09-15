@@ -10,14 +10,14 @@ public class Player1ChargeBullet : MonoBehaviour
   public float speed = 100f;
   public float basedmg = 50;
   GameObject firepoint;
-  GameObject player;
+  PlayerController player;
   int dir = 1;
   bool fired = false;
     // Start is called before the first frame update
     void Start()
     {
       firepoint = GameObject.Find("FirePoint");
-      player = GameObject.Find("Player 1");
+      player = GameObject.Find("Player 1").GetComponent<PlayerController>();
       rb = GetComponent<Rigidbody2D>();
       transform.localScale = new Vector3 (orbscale, orbscale, orbscale);
       StartCoroutine(OrbChange());
@@ -36,6 +36,14 @@ public class Player1ChargeBullet : MonoBehaviour
         {
           fired = true;
           increasing = false;
+          if (player.flipped)
+          {
+            transform.rotation = new Quaternion (0, 0, 0, 0);
+          }
+          else
+          {
+            transform.rotation = new Quaternion (0, 180, 0, 0);
+          }
           rb.velocity = transform.right * speed * -1;
           Destroy(gameObject, 5);
         }
