@@ -54,23 +54,23 @@ public class PlayerAttack : MonoBehaviour
       shooting = false;
       subshooting = false;
       ammoText.SetAmmo(currentAmmo);
-      if (Input.GetKey(gm.primfire))
+      if (Input.GetKey("Fire1"))
       {
         if (currentAmmo > 0)
         {
           shooting = true;
         }
       }
-
-      if (Input.GetKeyDown(gm.meleekey))
-      {
-        if (!attacking && !shooting && !reloading)
-        {
-          audioS.clip = clips[1];
-          audioS.Play();
-          animator.SetTrigger("Attack");
-        }
-      }
+      if (Input.GetKeyDown("Fire2"))
+      // if (Input.GetKeyDown(gm.meleekey))
+      // {
+      //   if (!attacking && !shooting && !reloading)
+      //   {
+      //     audioS.clip = clips[1];
+      //     audioS.Play();
+      //     animator.SetTrigger("Attack");
+      //   }
+      // }
       if (Input.GetKey(gm.reloadkey) && !reloading)
       {
         if (currentAmmo != 200)
@@ -86,13 +86,22 @@ public class PlayerAttack : MonoBehaviour
 
     void Shoot()
     {
-      if (shooting && !reloading && !attacking)
+      if (shooting && !reloading && !attacking && !subshooting)
       {
         if (currentAmmo >= 0)
         {
           Instantiate(bulletPrefab, firePoint.position, new Quaternion (0, bulrot, 0, 0));
           currentAmmo--;
         }
+      }
+    }
+
+    void Subshoot()
+    {
+      if (!shooting && !reloading && !attacking && !subshooting)
+      {
+        subshooting = true;
+        // Instantiate
       }
     }
 

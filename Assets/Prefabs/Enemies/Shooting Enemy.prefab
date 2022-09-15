@@ -137,6 +137,7 @@ MonoBehaviour:
   gameM: {fileID: 0}
   deathEffect: {fileID: 0}
   enemy: {fileID: 1172610642810545227}
+  dead: 0
 --- !u!50 &1172610642810545233
 Rigidbody2D:
   serializedVersion: 4
