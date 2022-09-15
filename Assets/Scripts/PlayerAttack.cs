@@ -8,6 +8,7 @@ public class PlayerAttack : MonoBehaviour
     public Transform firePoint;
     public Transform attackPoint;
     public GameObject bulletPrefab;
+    public GameObject chargebulletprefab;
     // public GameObject subbulletPrefab;
     GameManager gm;
     Animator animator;
@@ -22,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
     public bool reloading = false;
     public bool attacking = false;
 
+    public float CBCooldown = 8.0f;
     public float effectSpawnRate = 10;
     public int maxAmmo = 200;
     public int currentAmmo;
@@ -44,6 +46,7 @@ public class PlayerAttack : MonoBehaviour
       animator = GetComponent<Animator>();
       attackPoint = transform.Find("AttackPoint");
       bulletPrefab = Resources.Load<GameObject>("Bullet");
+      chargebulletprefab = Resources.Load<GameObject>("ChargeBullet");
       ammoText = GameObject.Find("AmmoText").GetComponent<AmmoText>();
       InvokeRepeating("Shoot", 0.0f, cooldown);
       currentAmmo = maxAmmo;
@@ -62,6 +65,9 @@ public class PlayerAttack : MonoBehaviour
         }
       }
       if (Input.GetButtonDown("Fire2"))
+      {
+        Subshoot();
+      }
       // if (Input.GetKeyDown(gm.meleekey))
       // {
       //   if (!attacking && !shooting && !reloading)
@@ -101,7 +107,7 @@ public class PlayerAttack : MonoBehaviour
       if (!shooting && !reloading && !attacking && !subshooting)
       {
         subshooting = true;
-        // Instantiate
+        Instantiate(chargebulletprefab, firePoint.position, new Quaternion (0, bulrot, 0, 0));
       }
     }
 
@@ -118,6 +124,12 @@ public class PlayerAttack : MonoBehaviour
           bulrot = 180;
         }
       }
+    }
+
+    IEnumerator ChargeBulletCooldown()
+    {
+      yield return new WaitForSeconds(CBCooldown);
+      subshooting = false;
     }
 
     IEnumerator ReloadTime()

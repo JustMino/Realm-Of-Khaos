@@ -6,7 +6,7 @@ public class ArmLayerChange : MonoBehaviour
 {
   GameManager gm;
   PlayerController player;
-  bool facingR = true;
+  public bool facingR = true;
     // Start is called before the first frame update
     void Start()
     {
