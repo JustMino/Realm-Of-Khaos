@@ -54,14 +54,14 @@ public class PlayerAttack : MonoBehaviour
       shooting = false;
       subshooting = false;
       ammoText.SetAmmo(currentAmmo);
-      if (Input.GetKey("Fire1"))
+      if (Input.GetButton("Fire1"))
       {
         if (currentAmmo > 0)
         {
           shooting = true;
         }
       }
-      if (Input.GetKeyDown("Fire2"))
+      if (Input.GetButtonDown("Fire2"))
       // if (Input.GetKeyDown(gm.meleekey))
       // {
       //   if (!attacking && !shooting && !reloading)
