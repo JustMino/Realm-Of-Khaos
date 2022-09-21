@@ -13,6 +13,7 @@ public class Player1ChargeBullet : MonoBehaviour
   PlayerController player;
   int dir = 1;
   bool fired = false;
+  bool facingR = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,14 +37,7 @@ public class Player1ChargeBullet : MonoBehaviour
         {
           fired = true;
           increasing = false;
-          if (player.flipped)
-          {
-            transform.rotation = new Quaternion (0, 0, 0, 0);
-          }
-          else
-          {
-            transform.rotation = new Quaternion (0, 180, 0, 0);
-          }
+          OrbDir();
           rb.velocity = transform.right * speed * -1;
           Destroy(gameObject, 5);
         }
@@ -59,6 +53,50 @@ public class Player1ChargeBullet : MonoBehaviour
       if (increasing)
       {
         StartCoroutine(OrbChange());
+      }
+    }
+
+    void OrbDir()
+    {
+      if (!Input.GetButton("Strafe"))
+      {
+        if (player.flipped)
+        {
+          facingR = false;
+        }
+        else
+        {
+          facingR = true;
+        }
+      }
+      if (Input.GetButton("Strafe"))
+      {
+        if (player.flipped && !facingR)
+        {
+          if (Input.GetAxis("Horizontal") < 0)
+          {
+            transform.rotation = new Quaternion (0, 0, 0, 0);
+          }
+          else if (Input.GetAxis("Horizontal") > 0)
+          {
+            transform.rotation = new Quaternion (0, 180, 0, 0);
+          }
+        }
+        if (player.flipped && facingR)
+        {
+          if (Input.GetAxis("Horizontal") < 0)
+          {
+            transform.rotation = new Quaternion (0, 180, 0, 0);
+          }
+          else if (Input.GetAxis("Horizontal") > 0)
+          {
+            transform.rotation = new Quaternion (0, 0, 0, 0);
+          }
+        }
+      }
+      else if (!Input.GetButton("Strafe"))
+      {
+        transform.rotation = new Quaternion (0, 0, 0, 0);
       }
     }
 
