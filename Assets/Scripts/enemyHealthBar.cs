@@ -15,6 +15,7 @@ public class enemyHealthBar : MonoBehaviour
   public Vector3 barPosition;
   public bool healthbar = false;
   public bool dead = false;
+  public bool shocked = false;
 
   void Start()
   {

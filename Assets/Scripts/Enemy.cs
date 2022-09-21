@@ -13,10 +13,13 @@ public class Enemy : MonoBehaviour
   public GameObject enemy;
   Animator animator;
   public bool dead = false;
+  public float dmgmul = 1.5f;
+  SpriteRenderer SR;
   // EnemyHealth enemyh;
 
   void Start()
   {
+    SR = GetComponent<SpriteRenderer>();
     gameM = GameObject.Find("GameManager");
     gm = gameM.GetComponent<GameManager>();
     animator = GetComponent<Animator>();
@@ -78,7 +81,7 @@ public class Enemy : MonoBehaviour
 
   public void TakeDamage(int damage)
   {
-    enemyhealth -= damage;
+    enemyhealth -= damage * dmgmul;
 
     if (enemyhealth <= 0 && !dead)
     {
@@ -90,5 +93,23 @@ public class Enemy : MonoBehaviour
   void Die()
   {
     Destroy(enemy, 0.1f);
+  }
+
+  void OnTriggerEnter(Collider other)
+  {
+    if (other.tag == "EMP")
+    {
+      StartCoroutine(GotShocked());
+    }
+  }
+
+  IEnumerator GotShocked()
+  {
+    Color color = SR.color;
+    SR.color = (133, 253, 255);
+    dmgmul = 1.5f;
+    yield return new WaitForSeconds(5.0f);
+    SR.color = color;
+    dmgmul = 1.0f;
   }
 }
