@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour
 
   public void TakeDamage(int damage)
   {
-    enemyhealth -= damage * dmgmul;
+    enemyhealth -= (int)(damage * dmgmul);
 
     if (enemyhealth <= 0 && !dead)
     {
@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour
   IEnumerator GotShocked()
   {
     Color color = SR.color;
-    SR.color = (133, 253, 255);
+    SR.color = new Color (133, 253, 255);
     dmgmul = 1.5f;
     yield return new WaitForSeconds(5.0f);
     SR.color = color;

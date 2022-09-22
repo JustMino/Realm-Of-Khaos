@@ -10,7 +10,7 @@ public class EMP : MonoBehaviour
 
   void Start()
   {
-    transform.localScale = (0f, 0f, 0f);
+    transform.localScale = new Vector3 (0f, 0f, 0f);
     StartCoroutine(MoveEMP());
   }
 
