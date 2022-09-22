@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     public Transform attackPoint;
     public GameObject bulletPrefab;
     public GameObject chargebulletprefab;
+    public GameObject AbOnePrefab;
     // public GameObject subbulletPrefab;
     GameManager gm;
     Animator animator;
@@ -22,8 +23,10 @@ public class PlayerAttack : MonoBehaviour
     public bool subshooting = false;
     public bool reloading = false;
     public bool attacking = false;
+    public bool AbOneReady = true;
 
     public float CBCooldown = 8.0f;
+    public float AbOneCooldown = 15.0f;
     public float effectSpawnRate = 10;
     public int maxAmmo = 200;
     public int currentAmmo;
@@ -47,6 +50,7 @@ public class PlayerAttack : MonoBehaviour
       attackPoint = transform.Find("AttackPoint");
       bulletPrefab = Resources.Load<GameObject>("Bullet");
       chargebulletprefab = Resources.Load<GameObject>("ChargeBullet");
+      AbOnePrefab = Resources.Load<GameObject>("EMP");
       ammoText = GameObject.Find("AmmoText").GetComponent<AmmoText>();
       InvokeRepeating("Shoot", 0.0f, cooldown);
       currentAmmo = maxAmmo;
@@ -68,15 +72,13 @@ public class PlayerAttack : MonoBehaviour
       {
         Subshoot();
       }
-      // if (Input.GetKeyDown(gm.meleekey))
-      // {
-      //   if (!attacking && !shooting && !reloading)
-      //   {
-      //     audioS.clip = clips[1];
-      //     audioS.Play();
-      //     animator.SetTrigger("Attack");
-      //   }
-      // }
+      if (Input.GetButtonDown("Ability 1"))
+      {
+        if (AbOneReady)
+        {
+          AbilityOne();
+        }
+      }
       if (Input.GetKey(gm.reloadkey) && !reloading)
       {
         if (currentAmmo != 200)
@@ -111,6 +113,15 @@ public class PlayerAttack : MonoBehaviour
       }
     }
 
+    void AbilityOne()
+    {
+      if (!shooting && !reloading && !attacking && !subshooting)
+      {
+        Instantiate(AbOnePrefab, transform.position, Quaternion.identity);
+        StartCoroutine(AbilityOneCooldown());
+      }
+    }
+
     void rotatebullet()
     {
       if(!Input.GetKey(gm.strafekey))
@@ -130,6 +141,13 @@ public class PlayerAttack : MonoBehaviour
     {
       yield return new WaitForSeconds(CBCooldown);
       subshooting = false;
+    }
+
+    IEnumerator AbilityOneCooldown()
+    {
+      AbOneReady = false;
+      yield return new WaitForSeconds(AbOneCooldown);
+      AbOneReady = true;
     }
 
     IEnumerator ReloadTime()

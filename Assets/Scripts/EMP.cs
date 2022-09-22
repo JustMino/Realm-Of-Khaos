@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EMP : MonoBehaviour
 {
-  public float maxscale = 3.0f;
-  public float traveltime = 2.0f;
+  public float maxscale = 15.0f;
+  public float traveltime = 1.0f;
   Vector3 curscale;
 
   void Start()
@@ -24,6 +24,10 @@ public class EMP : MonoBehaviour
     if (curscale.x < maxscale)
     {
       StartCoroutine(MoveEMP());
+    }
+    else
+    {
+      Destroy(gameObject);
     }
   }
 }

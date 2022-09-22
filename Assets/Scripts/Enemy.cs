@@ -97,6 +97,7 @@ public class Enemy : MonoBehaviour
 
   void OnTriggerEnter(Collider other)
   {
+    Debug.Log("Collided with somethin");
     if (other.tag == "EMP")
     {
       StartCoroutine(GotShocked());
