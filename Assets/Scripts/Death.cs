@@ -45,15 +45,13 @@ public class Death : MonoBehaviour
     m_Rigidbody2D = GetComponent<Rigidbody2D>();
     deathanim = GameObject.Find("Death Anim");
     canvas = GameObject.Find("Canvas");
-    canvasX = canvas.transform.position.x;
-    canvasY = canvas.transform.position.y;
     heart = Resources.Load<GameObject>("Heart");
     templives = gm.lives;
     for (int i = 0; i < gm.lives; i++)
     {
       hearts[i] = Instantiate(heart);
       hearts[i].transform.SetParent(canvas.transform, true);
-      hearts[i].transform.position = new Vector3(HeartX + canvasX + heartDist * i, 380 + canvasY, 0);
+      hearts[i].transform.position = new Vector3(heartDist * i, 100, 0);
     }
   }
 
