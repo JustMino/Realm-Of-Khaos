@@ -51,7 +51,7 @@ public class Death : MonoBehaviour
     {
       hearts[i] = Instantiate(heart);
       hearts[i].transform.SetParent(canvas.transform, true);
-      hearts[i].transform.position = new Vector3(heartDist * i, 100, 0);
+      hearts[i].transform.position = new Vector3(Screen.width + heartDist * i, Screen.height * 0.95f, 0);
     }
   }
 
