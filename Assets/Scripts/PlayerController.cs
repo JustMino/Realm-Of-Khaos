@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
 
   public AudioSource audioS;
   public AudioClip[] clips;
+
+  [SerializeField] LayerMask GroundLayers;
   void Awake()
   {
     // audio = GetComponent<AudioSource>();
@@ -66,12 +68,8 @@ public class PlayerController : MonoBehaviour
 
   void Update()
   {
-    if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-    {
-      m_Rigidbody2D.AddForce(new Vector2 (0f, 0f));
-      m_Rigidbody2D.AddForce(transform.up * gm.groundjumpForce, ForceMode2D.Impulse);
-      animator.SetBool("isJumping", true);
-    }
+    isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.9f, WhatIsGround);
+    Debug.DrawRay(transform.position, Vector3.down*3.1075f, Color.green);
     if (Input.GetKey(gm.leftkey))
     {
       horizontalInput = -1f;
@@ -126,6 +124,12 @@ public class PlayerController : MonoBehaviour
   void FixedUpdate()
   {
     Move(horizontalMove);
+    if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+    {
+      m_Rigidbody2D.AddForce(new Vector2 (0f, 0f));
+      m_Rigidbody2D.AddForce(transform.up * gm.groundjumpForce, ForceMode2D.Impulse);
+      animator.SetBool("isJumping", true);
+    }
   }
 
 
@@ -167,36 +171,36 @@ public class PlayerController : MonoBehaviour
     // }
   }
 
-  void OnTriggerExit2D(Collider2D other)
-  {
-    if(other.gameObject.CompareTag("World") && !platform)
-    {
-      colcount--;
-    }
-    else if (other.gameObject.CompareTag("Boss Room Trigger"))
-    {
-      gm.inbossroom = false;
-    }
-  }
+  // void OnTriggerExit2D(Collider2D other)
+  // {
+  //   if(other.gameObject.CompareTag("World") && !platform)
+  //   {
+  //     colcount--;
+  //   }
+  //   else if (other.gameObject.CompareTag("Boss Room Trigger"))
+  //   {
+  //     gm.inbossroom = false;
+  //   }
+  // }
 
-  void OnCollisionEnter2D(Collision2D other)
-  {
-    if (other.gameObject.CompareTag("Platform"))
-    {
-      ContactPoint2D otherContact = other.contacts[0];
-      normalStruck = otherContact.normal;
-
-      if (normalStruck.y == 1.0f)
-      {
-        isGrounded = true;
-        platform = true;
-        animator.SetBool("isGrounded", true);
-        animator.SetBool("isJumping", false);
-        gm.groundjumpForce = temppjf;
-        normalStruck = new Vector2 (0,0);
-      }
-    }
-  }
+  // void OnCollisionEnter2D(Collision2D other)
+  // {
+  //   if (other.gameObject.CompareTag("Platform"))
+  //   {
+  //     ContactPoint2D otherContact = other.contacts[0];
+  //     normalStruck = otherContact.normal;
+  //
+  //     if (normalStruck.y == 1.0f)
+  //     {
+  //       isGrounded = true;
+  //       platform = true;
+  //       animator.SetBool("isGrounded", true);
+  //       animator.SetBool("isJumping", false);
+  //       gm.groundjumpForce = temppjf;
+  //       normalStruck = new Vector2 (0,0);
+  //     }
+  //   }
+  // }
 
   void OnCollisionExit2D(Collision2D other)
   {
@@ -212,6 +216,7 @@ public class PlayerController : MonoBehaviour
       animator.SetBool("isGrounded", false);
     }
   }
+
 
   IEnumerator Footsteps()
   {

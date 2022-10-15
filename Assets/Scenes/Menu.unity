@@ -457,8 +457,8 @@ MonoBehaviour:
   resolutionheight: 1080
   brightness: 0
   quality: 3
-  shootkey: 323
-  laserkey: 324
+  primfire: 323
+  subfire: 324
   meleekey: 101
   reloadkey: 114
   jumpkey: 32
@@ -466,8 +466,9 @@ MonoBehaviour:
   rightkey: 100
   downkey: 115
   pausekey: 27
+  strafekey: 304
   moveSpeed: 2
-  groundjumpForce: 2100
+  groundjumpForce: 50
   MovementSmoothing: 0.05
   maxhealth: 100
   attackRange: 0.5
@@ -484,13 +485,13 @@ MonoBehaviour:
   flyingdamage: 5
   flyingmaxhealth: 100
   catspeed: 1.5
-  catmaxhealth: 100
+  catmaxhealth: 200
   catdamage: 5
   catattackDistance: 3.5
   catattackRange: 1
   catattackcooldown: 1
-  slasherspeed: 4
-  slashermaxhealth: 150
+  slasherspeed: 2.5
+  slashermaxhealth: 100
   slasherdamage: 10
   slasherattackdistance: 3.5
   slasherattackrange: 1
@@ -500,9 +501,18 @@ MonoBehaviour:
   flamecooldown: 0.025
   rocketdmg: 10
   shockwavedmg: 10
-  bossspeed: 2
+  bossspeed: 1.5
+  mingroundlength: 10
+  maxgroundlength: 21
+  minheightchange: 10
+  maxheightchange: 16
+  fillstartypos: -5
+  fillstartxpos: -10
+  wallheight: 20
+  extrawalls: 10
   shockwavecount: 0
   inbossroom: 0
+  selectedchar: 0
 --- !u!4 &595861209
 Transform:
   m_ObjectHideFlags: 0
@@ -839,6 +849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit

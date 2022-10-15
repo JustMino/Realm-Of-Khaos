@@ -47,25 +47,15 @@ public class EnemySpawner : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-      if (other.gameObject.tag == "SpawnZone")
-      {
-        spawnable = true;
-      }
-      if (other.gameObject.tag == "NoSpawnZone")
-      {
-        notspawnable = true;
-      }
+      if (other.gameObject.tag == "SpawnZone") spawnable = true;
+      if (other.gameObject.tag == "NoSpawnZone") notspawnable = true;
+      if (other.gameObject.tag == "World") notspawnable = true;
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-      if (other.gameObject.tag == "SpawnZone")
-      {
-        spawnable = false;
-      }
-      if (other.gameObject.tag == "NoSpawnZone")
-      {
-        notspawnable = false;
-      }
+      if (other.gameObject.tag == "SpawnZone") spawnable = false;
+      if (other.gameObject.tag == "NoSpawnZone") notspawnable = false;
+      if (other.gameObject.tag == "World") notspawnable = false;
     }
 }

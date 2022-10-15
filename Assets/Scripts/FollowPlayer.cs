@@ -10,7 +10,7 @@ public class FollowPlayer : MonoBehaviour
     void Start()
     {
       rb = GetComponent<Rigidbody2D>();
-      player = GameObject.Find("Player");
+      player = GameObject.Find("Player 1");
     }
 
     // Update is called once per frame

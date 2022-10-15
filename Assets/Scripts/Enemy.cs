@@ -95,16 +95,7 @@ public class Enemy : MonoBehaviour
     Destroy(enemy, 0.1f);
   }
 
-  void OnTriggerEnter(Collider other)
-  {
-    Debug.Log("Collided with somethin");
-    if (other.tag == "EMP")
-    {
-      StartCoroutine(GotShocked());
-    }
-  }
-
-  IEnumerator GotShocked()
+  public IEnumerator GotShocked()
   {
     Color color = SR.color;
     SR.color = new Color (133, 253, 255);

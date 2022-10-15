@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
   [Header("Player Controller Values")]
   public float moveSpeed = 2.0f;
-  public float groundjumpForce = 2100.0f;
+  public float groundjumpForce = 50.0f;
   public float MovementSmoothing = 0.05f;
 
   [Space(5)]

@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 4412072569476001269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -49.92201, y: -6.9609313, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8584390085204367299}
@@ -107,7 +107,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.17402458}
+  m_Offset: {x: 0.079319954, y: -0.29605472}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -118,7 +118,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.3480492}
+  m_Size: {x: 3.0989208, y: 1.7995608}
   m_EdgeRadius: 0
 --- !u!114 &4412072569476001264
 MonoBehaviour:
@@ -139,6 +139,7 @@ MonoBehaviour:
   deathEffect: {fileID: 0}
   enemy: {fileID: 4412072569476001269}
   dead: 0
+  dmgmul: 1.5
 --- !u!50 &4412072569476001265
 Rigidbody2D:
   serializedVersion: 4
@@ -298,6 +299,7 @@ MonoBehaviour:
   barPosition: {x: 0, y: 0, z: 0}
   healthbar: 0
   dead: 0
+  shocked: 0
 --- !u!82 &-5838130355246171041
 AudioSource:
   m_ObjectHideFlags: 0

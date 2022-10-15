@@ -29,7 +29,7 @@ public class HealthBar : MonoBehaviour
 
       fill.color = gradient.Evaluate(slider.normalizedValue);
       string[] tmp = valueText.text.Split(':');
-      valueText.text = tmp[0] + ":" + health;
+      valueText.text = tmp[0] + ": " + health;
     }
 
 
