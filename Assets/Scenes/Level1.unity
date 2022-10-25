@@ -1973,7 +1973,7 @@ GameObject:
   - component: {fileID: 597464438}
   - component: {fileID: 597464437}
   - component: {fileID: 597464436}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: World
   m_Icon: {fileID: 0}
@@ -3696,6 +3696,14 @@ PrefabInstance:
     - target: {fileID: 7647376752953744860, guid: 9d8679712775fa146819ffc3b56bbb14, type: 3}
       propertyPath: AbOneCooldown
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7647376752953744861, guid: 9d8679712775fa146819ffc3b56bbb14, type: 3}
+      propertyPath: raycastdistance
+      value: 3.1075
+      objectReference: {fileID: 0}
+    - target: {fileID: 7647376752953744861, guid: 9d8679712775fa146819ffc3b56bbb14, type: 3}
+      propertyPath: WhatIsGround.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 7647376752953744866, guid: 9d8679712775fa146819ffc3b56bbb14, type: 3}
       propertyPath: m_Enabled
