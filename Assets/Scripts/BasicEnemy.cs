@@ -223,11 +223,11 @@ public class BasicEnemy : MonoBehaviour
       }
       if (transform.position.x - target.position.x < 0)
       {
-        transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        transform.localScale = new Vector3(-2.0f, 2.0f, 2.0f);
       }
       else
       {
-        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
       }
     }
   }

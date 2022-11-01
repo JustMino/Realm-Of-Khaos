@@ -35,8 +35,10 @@ public class PlayerController : MonoBehaviour
     horizontalInput = Input.GetAxisRaw("Horizontal");
     isGrounded = Physics2D.Raycast(transform.position, Vector3.down, raycastdistance, WhatIsGround);
     Debug.DrawRay(transform.position, Vector3.down*raycastdistance, Color.green);
-    flipped = (horizontalInput >= 0) ? true : false;
-    transform.localScale = (horizontalInput >= 0) ? new Vector3 (1.0f, 1.0f, 1.0f) : new Vector3 (-1.0f, 1.0f, 1.0f);
+    if (horizontalInput > 0) flipped = false;
+    else if (horizontalInput < 0) flipped = true;
+    if (horizontalInput > 0) transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
+    else if (horizontalInput < 0) transform.localScale = new Vector3 (-1.0f, 1.0f, 1.0f);
     animator.SetBool("isRunning", (horizontalInput != 0) ? true : false);
     animator.SetBool("isGrounded", isGrounded);
     if (isGrounded) animator.SetBool("isJumping", false);

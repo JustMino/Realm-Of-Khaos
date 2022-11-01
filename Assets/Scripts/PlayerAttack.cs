@@ -128,11 +128,11 @@ public class PlayerAttack : MonoBehaviour
       {
         if (Input.GetKey(gm.leftkey))
         {
-          bulrot = 0;
+          bulrot = 180;
         }
         else if (Input.GetKey(gm.rightkey))
         {
-          bulrot = 180;
+          bulrot = 0;
         }
       }
     }
