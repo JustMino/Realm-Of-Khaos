@@ -38,7 +38,7 @@ public class Player1ChargeBullet : MonoBehaviour
           fired = true;
           increasing = false;
           OrbDir();
-          rb.velocity = transform.right * speed * -1;
+          rb.velocity = transform.right * speed;
           Destroy(gameObject, 5);
         }
       }
@@ -102,27 +102,30 @@ public class Player1ChargeBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-      int dmg = (int) (basedmg * orbscale);
-      if (hitInfo.tag == "Enemy")
+      if (fired)
       {
-        Enemy enemy = hitInfo.GetComponent<Enemy>();
-        if (enemy != null)
+        int dmg = (int) (basedmg * orbscale);
+        if (hitInfo.tag == "Enemy")
         {
-          enemy.TakeDamage(dmg);
+          Enemy enemy = hitInfo.GetComponent<Enemy>();
+          if (enemy != null)
+          {
+            enemy.TakeDamage(dmg);
+          }
         }
-      }
-      else if (hitInfo.tag == "Boss")
-      {
-        Boss boss = hitInfo.GetComponent<Boss>();
-        if (boss != null)
+        else if (hitInfo.tag == "Boss")
         {
-          boss.TakeDamage(dmg);
+          Boss boss = hitInfo.GetComponent<Boss>();
+          if (boss != null)
+          {
+            boss.TakeDamage(dmg);
+            Destroy(gameObject);
+          }
+        }
+        if (hitInfo.tag == "World")
+        {
           Destroy(gameObject);
         }
-      }
-      if (hitInfo.tag == "World")
-      {
-        Destroy(gameObject);
       }
     }
 }

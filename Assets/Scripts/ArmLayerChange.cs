@@ -32,17 +32,14 @@ public class ArmLayerChange : MonoBehaviour
           if (player.flipped && facingR)
           {
             transform.localScale = new Vector3 (-1.0f, 1.0f, 1.0f);
-            atk.bulrot = 0;
           }
           else if (player.flipped && !facingR)
           {
             transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
-            atk.bulrot = 0;
           }
         }
         if (Input.GetKey(gm.rightkey))
         {
-          atk.bulrot = 180;
           if (!player.flipped && facingR)
           {
             transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);

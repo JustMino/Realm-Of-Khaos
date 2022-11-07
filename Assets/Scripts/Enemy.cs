@@ -86,7 +86,15 @@ public class Enemy : MonoBehaviour
     if (enemyhealth <= 0 && !dead)
     {
       dead = true;
+      animator.SetBool("Dead", true);
       animator.SetTrigger("Death");
+      BoxCollider2D[] cols = GetComponents<BoxCollider2D>();
+      GetComponent<Rigidbody2D>().gravityScale = 0f;
+      foreach(BoxCollider2D col in cols)
+      {
+        col.enabled = false;
+      }
+      Destroy(enemy, 1f);
     }
   }
 

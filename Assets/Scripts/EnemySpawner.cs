@@ -11,11 +11,18 @@ public class EnemySpawner : MonoBehaviour
   public bool notspawnable = false;
   public bool collisioncheck = false;
 
+  [SerializeField] LayerMask layerscheck;
+
   public int enemytype;
 
     void Start()
     {
       StartCoroutine(SpawnCountdown());
+    }
+
+    void Update()
+    {
+      UpdateSpawnable();
     }
 
     IEnumerator SpawnCountdown()
@@ -45,17 +52,22 @@ public class EnemySpawner : MonoBehaviour
       }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void UpdateSpawnable()
     {
-      if (other.gameObject.tag == "SpawnZone") spawnable = true;
-      if (other.gameObject.tag == "NoSpawnZone") notspawnable = true;
-      if (other.gameObject.tag == "World") notspawnable = true;
+      Collider2D[] col = Physics2D.OverlapBoxAll(transform.position, new Vector2 (1.0f, 1.0f), 0.0f, layerscheck);
+      notspawnable = (col != null) ? true : false;
+      if (notspawnable) Debug.Log("Found something");
+      else Debug.Log("Found nothing");
     }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-      if (other.gameObject.tag == "SpawnZone") spawnable = false;
-      if (other.gameObject.tag == "NoSpawnZone") notspawnable = false;
-      if (other.gameObject.tag == "World") notspawnable = false;
-    }
+    // void OnTriggerStay2D(Collider2D other)
+    // {
+    //   // if (other.gameObject.tag == "SpawnZone") spawnable = true;
+    //   if (other.gameObject.tag == "World") notspawnable = true;
+    // }
+    //
+    // void OnTriggerExit2D(Collider2D other)
+    // {
+    //   if (other.gameObject.tag == "SpawnZone") spawnable = false;
+    //   if (other.gameObject.tag == "World") notspawnable = false;
+    // }
 }

@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
     }
   }
 
+  void Start()
+  {
+    Time.timeScale = 1.0f;
+  }
+
   [Header("Settings")]
   public bool fullscreen = true;
   public float mastervolume;

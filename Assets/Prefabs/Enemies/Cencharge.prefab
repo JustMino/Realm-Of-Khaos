@@ -137,6 +137,7 @@ MonoBehaviour:
   deathEffect: {fileID: 0}
   enemy: {fileID: 2935021727471991842}
   dead: 0
+  dmgmul: 1.5
 --- !u!50 &8040122528160147703
 Rigidbody2D:
   serializedVersion: 4
@@ -212,6 +213,7 @@ MonoBehaviour:
   barPosition: {x: 0, y: 0, z: 0}
   healthbar: 0
   dead: 0
+  shocked: 0
 --- !u!95 &498306944
 Animator:
   serializedVersion: 4

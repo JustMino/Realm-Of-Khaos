@@ -76,7 +76,7 @@ public class PlayerAttack : MonoBehaviour
       {
         if (AbOneReady)
         {
-          AbilityOne();
+          // AbilityOne();
         }
       }
       if (Input.GetKey(gm.reloadkey) && !reloading)
@@ -128,11 +128,11 @@ public class PlayerAttack : MonoBehaviour
       {
         if (Input.GetKey(gm.leftkey))
         {
-          bulrot = 180;
+          bulrot = 0;
         }
         else if (Input.GetKey(gm.rightkey))
         {
-          bulrot = 0;
+          bulrot = 180;
         }
       }
     }

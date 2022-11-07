@@ -15,7 +15,7 @@ public class PlayCredits : MonoBehaviour
       string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "SufferingEndCredits_2.mp4");
       videoPlayer.url = filePath;
       videoPlayer.renderMode = UnityEngine.Video.VideoRenderMode.CameraNearPlane;
-      InvokeRepeating("checkOver", 0.1f, 0.1f);
+      InvokeRepeating("checkOver", 5.0f, 0.1f);
     }
 
     private void checkOver()

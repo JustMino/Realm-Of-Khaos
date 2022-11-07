@@ -8,8 +8,6 @@ using UnityEngine.SceneManagement;
 public class OptionsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
-    Resolution[] resolutions;
-    public Dropdown ResolutionDropdown;
 
     GameManager gm;
     public GameObject gameM;
@@ -17,7 +15,6 @@ public class OptionsMenu : MonoBehaviour
     public Slider mastervolume;
     public Slider gameeffectsvolume;
     public Slider musicvolume;
-    public Slider brightness;
 
     public float Mvol;
     public float gevol;
@@ -35,46 +32,12 @@ public class OptionsMenu : MonoBehaviour
         mastervolume = GameObject.Find("Master Volume").GetComponent<Slider>();
         gameeffectsvolume = GameObject.Find("Game Effects Volume").GetComponent<Slider>();
         musicvolume = GameObject.Find("Music Volume").GetComponent<Slider>();
-        brightness = GameObject.Find("Brightness Slider").GetComponent<Slider>();
         mastervolume.value = gm.mastervolume;
         gameeffectsvolume.value = gm.gameeffectsvolume;
         musicvolume.value = gm.musicvolume;
-        brightness.value = gm.brightness;
-        QualitySettings.SetQualityLevel(gm.quality);
-        int CurrentResolutionIndex = 0;
-        resolutions = Screen.resolutions;
-
-        ResolutionDropdown.ClearOptions();
-
-        List<string> options = new List<string>();
-
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            string Option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(Option);
-
-            if(resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
-            {
-                CurrentResolutionIndex = i;
-            }
-        }
-
-        ResolutionDropdown.AddOptions(options);
-        ResolutionDropdown.value = CurrentResolutionIndex;
-        ResolutionDropdown.RefreshShownValue();
         SetMasterVolume(gm.mastervolume);
         SetGameEffectsVolume(gm.gameeffectsvolume);
         SetMusicVolume(gm.musicvolume);
-    }
-
-
-    public void SetResolution(int ResolutionIndex)
-    {
-        Resolution resolution = resolutions[ResolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        gm.resolutionwidth = resolution.width;
-        gm.resolutionheight = resolution.height;
     }
 
     void Update()
@@ -163,19 +126,6 @@ public class OptionsMenu : MonoBehaviour
       }
     }
 
-    public void SetBrightness(float brightness)
-    {
-      gm.brightness = brightness;
-    }
-
-
-    public void SetQuality(int qualityIndex)
-    {
-        QualitySettings.SetQualityLevel(qualityIndex);
-        gm.quality = qualityIndex;
-    }
-
-
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
@@ -184,7 +134,7 @@ public class OptionsMenu : MonoBehaviour
 
     public void GoBack()
     {
-      SceneManager.LoadScene(1, LoadSceneMode.Single);
+      SceneManager.UnloadSceneAsync(2);
     }
 
     public void GoControls()

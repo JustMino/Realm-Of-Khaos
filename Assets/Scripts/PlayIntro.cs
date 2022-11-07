@@ -14,7 +14,7 @@ public class PlayIntro : MonoBehaviour
       string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "splash.mov");
       videoPlayer.url = filePath;
       videoPlayer.renderMode = UnityEngine.Video.VideoRenderMode.CameraNearPlane;
-      InvokeRepeating("checkOver", 0.1f, 0.1f);
+      InvokeRepeating("checkOver", 5.0f, 0.1f);
     }
 
     private void checkOver()
