@@ -11,17 +11,23 @@ public class Player1ChargeBullet : MonoBehaviour
   public float basedmg = 50;
   GameObject firepoint;
   PlayerController player;
+  GameManager gm;
   int dir = 1;
   bool fired = false;
   bool facingR = true;
+  float playerscale;
+  float armscale;
     // Start is called before the first frame update
     void Start()
     {
+      gm = GameObject.Find("GameManager").GetComponent<GameManager>();
       firepoint = GameObject.Find("FirePoint");
       player = GameObject.Find("Player 1").GetComponent<PlayerController>();
       rb = GetComponent<Rigidbody2D>();
       transform.localScale = new Vector3 (orbscale, orbscale, orbscale);
       StartCoroutine(OrbChange());
+      playerscale = GameObject.Find("Player 1").transform.localScale.x;
+      armscale = GameObject.Find("Arm and Gun").transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -32,13 +38,14 @@ public class Player1ChargeBullet : MonoBehaviour
         if (increasing)
         {
           transform.position = firepoint.transform.position;
+
         }
         if (Input.GetButtonUp("Fire2"))
         {
           fired = true;
           increasing = false;
-          OrbDir();
-          rb.velocity = transform.right * speed;
+          // OrbDir();
+          rb.velocity = Vector3.right * speed * playerscale * armscale;
           Destroy(gameObject, 5);
         }
       }
@@ -58,46 +65,46 @@ public class Player1ChargeBullet : MonoBehaviour
 
     void OrbDir()
     {
-      if (!Input.GetButton("Strafe"))
-      {
-        if (player.flipped)
-        {
-          facingR = false;
-        }
-        else
-        {
-          facingR = true;
-        }
-      }
-      if (Input.GetButton("Strafe"))
-      {
-        if (player.flipped && !facingR)
-        {
-          if (Input.GetAxis("Horizontal") < 0)
-          {
-            transform.rotation = new Quaternion (0, 0, 0, 0);
-          }
-          else if (Input.GetAxis("Horizontal") > 0)
-          {
-            transform.rotation = new Quaternion (0, 180, 0, 0);
-          }
-        }
-        if (player.flipped && facingR)
-        {
-          if (Input.GetAxis("Horizontal") < 0)
-          {
-            transform.rotation = new Quaternion (0, 180, 0, 0);
-          }
-          else if (Input.GetAxis("Horizontal") > 0)
-          {
-            transform.rotation = new Quaternion (0, 0, 0, 0);
-          }
-        }
-      }
-      else if (!Input.GetButton("Strafe"))
-      {
-        transform.rotation = new Quaternion (0, 0, 0, 0);
-      }
+      // if (!Input.GetButton("Strafe"))
+      // {
+      //   if (player.flipped)
+      //   {
+      //     facingR = false;
+      //   }
+      //   else
+      //   {
+      //     facingR = true;
+      //   }
+      // }
+      // if (Input.GetButton("Strafe"))
+      // {
+      //   if (player.flipped && !facingR)
+      //   {
+      //     if (Input.GetAxis("Horizontal") < 0)
+      //     {
+      //       transform.rotation = new Quaternion (0, 180, 0, 0);
+      //     }
+      //     else if (Input.GetAxis("Horizontal") > 0)
+      //     {
+      //       transform.rotation = new Quaternion (0, 180, 0, 0);
+      //     }
+      //   }
+      //   if (player.flipped && facingR)
+      //   {
+      //     if (Input.GetAxis("Horizontal") < 0)
+      //     {
+      //       transform.rotation = new Quaternion (0, 180, 0, 0);
+      //     }
+      //     else if (Input.GetAxis("Horizontal") > 0)
+      //     {
+      //       transform.rotation = new Quaternion (0, 0, 0, 0);
+      //     }
+      //   }
+      // }
+      // else if (!Input.GetButton("Strafe"))
+      // {
+      //   transform.rotation = new Quaternion (0, 0, 0, 0);
+      // }
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
