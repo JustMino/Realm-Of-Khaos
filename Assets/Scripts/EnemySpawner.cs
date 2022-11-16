@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
 
     void UpdateSpawnable()
     {
-      Collider2D[] col = Physics2D.OverlapBoxAll(transform.position, new Vector2 (1.0f, 1.0f), 0.0f, layerscheck, -Mathf.Infinity, Mathf.Infinity);
+      Collider2D[] col = Physics2D.OverlapBoxAll(transform.position, new Vector2 (1.0f, 1.0f), 0.0f, layerscheck);
       notspawnable = (col != null) ? true : false;
       if (notspawnable) Debug.Log("Found something");
       else Debug.Log("Found nothing");
